@@ -1,4 +1,5 @@
 ﻿using Fina.Shared.Models;
+using Fina.Shared.Requests.Categories;
 using Fina.Shared.Responses;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,11 @@ namespace Fina.Shared.Handler
 {
     public interface ICategoryHandler
     {
-
-        Task<Response<Category?>> CreateAsync(Requests.Categories.CreateCategoryRequest request);
-        Task<Response<Category?>> UpdateAsync(Requests.Categories.UpdateCategoryRequest request);
-        Task<Response<Category?>> DeleteAsync(Requests.Categories.DeleteCategoryRequest request);
-        Task<Response<Category?>> GetbyIdAsync(Requests.Categories.GetCategoryByIdRequest request);
-        Task<PagedResponse<List<Category>>> GetAllAsync(Requests.Categories.GetAllCategoriesRequest request);
-    
+            
+        Task<Response<Category?>> CreateAsync(CreateCategoryRequest request);
+        Task<Response<Category?>> UpdateAsync(UpdateCategoryRequest request);
+        Task<Response<Category?>> DeleteAsync(DeleteCategoryRequest request);
+        Task<PagedResponse<List<Category>>> GetAllAsync(GetAllCategoriesRequest request);
+        Task<Response<Category?>> GetByIdAsync(GetCategoryByIdRequest request);
     }
 }
