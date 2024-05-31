@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Fina.Shared.Responses
 {
@@ -12,9 +7,13 @@ namespace Fina.Shared.Responses
         private int _code = Configuration.DefaultStatusCode;
 
         [JsonConstructor]
-        public Response() => _code = Configuration.DefaultStatusCode;
+        public Response()
+            => _code = Configuration.DefaultStatusCode;
 
-        public Response(TData? data, int code = Configuration.DefaultStatusCode, string? message = null)
+        public Response(
+            TData? data,
+            int code = Configuration.DefaultStatusCode,
+            string? message = null)
         {
             Data = data;
             _code = code;

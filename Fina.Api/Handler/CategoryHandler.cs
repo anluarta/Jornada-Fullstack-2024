@@ -52,14 +52,15 @@ namespace Fina.Api.Handler
             }
         }
 
-        public async Task<PagedResponse<List<Category>>> GetAllAsync(GetAllCategoriesRequest request)
+        public async Task<PagedResponse<List<Category>?>> GetAllAsync(GetAllCategoriesRequest request)
         {
             try
             {
-                var query = context.Categories
-                .AsNoTracking()
-                .Where(c => c.UserId == request.UserId)
-                .OrderBy(c => c.Title);
+                var query = context
+                    .Categories
+                    .AsNoTracking()
+                    .Where(c => c.UserId == request.UserId)
+                    .OrderBy(c => c.Title);
 
                 var categories = await query
                     .Skip((request.PageNumber - 1) * request.PageSize)
@@ -68,13 +69,13 @@ namespace Fina.Api.Handler
                 var count = await query.CountAsync();
 
                 return new PagedResponse<List<Category>?>(data: categories,
+                                                          totalCount: count,
                                                           currentPage: request.PageNumber,
-                                                          pageSize: request.PageSize,
-                                                          totalCount: count);
+                                                          pageSize: request.PageSize);
             }
             catch
             {
-                return new PagedResponse<List<Category>>(null, 500, "Erro ao buscar categorias");
+                return new PagedResponse<List<Category>?>(null, 500, "Erro ao buscar categorias");
             }
         }
 
